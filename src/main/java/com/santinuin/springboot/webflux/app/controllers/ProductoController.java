@@ -148,7 +148,7 @@ public class ProductoController {
                             producto.setCreateAt(new Date());
                         }
                         if (!file.filename().isEmpty()) {
-                            producto.setFoto(UUID.randomUUID().toString() + "-" + file.filename()
+                            producto.setFoto(UUID.randomUUID() + "-" + file.filename()
                                     .replace(" ", "")
                                     .replace(":", "")
                                     .replace("\\", "")

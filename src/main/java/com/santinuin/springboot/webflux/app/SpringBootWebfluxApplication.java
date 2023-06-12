@@ -1,6 +1,5 @@
 package com.santinuin.springboot.webflux.app;
 
-import com.santinuin.springboot.webflux.app.models.dao.ProductoDao;
 import com.santinuin.springboot.webflux.app.models.documents.Categoria;
 import com.santinuin.springboot.webflux.app.models.documents.Producto;
 import com.santinuin.springboot.webflux.app.models.service.ProductoService;
@@ -31,7 +30,7 @@ public class SpringBootWebfluxApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         mongoTemplate.dropCollection("productos").subscribe();
         mongoTemplate.dropCollection("categorias").subscribe();
