@@ -1,7 +1,7 @@
 package com.santinuin.springboot.webflux.app.controllers;
 
-import com.santinuin.springboot.webflux.app.models.dao.ProductoDao;
 import com.santinuin.springboot.webflux.app.models.documents.Producto;
+import com.santinuin.springboot.webflux.app.models.service.ProductoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/productos")
 public class ProductoRestController {
 
-
     @Autowired
-    private ProductoDao dao;
+    private ProductoService service;
 
     public static final Logger log = LoggerFactory.getLogger(ProductoController.class);
 
     @GetMapping
     public Flux<Producto> index(){
 
-        Flux<Producto> productos = dao.findAll().map(producto -> {
+        Flux<Producto> productos = service.findAll().map(producto -> {
 
             producto.setNombre(producto.getNombre().toUpperCase());
             return producto;
@@ -37,7 +36,7 @@ public class ProductoRestController {
     @GetMapping("/{id}")
     public Mono<Producto> show(@PathVariable String id){
 
-        Flux<Producto> productos = dao.findAll();
+        Flux<Producto> productos = service.findAll();
 
         Mono<Producto> producto = productos.filter(p -> p.getId().equals(id))
                 .next()
